@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>OpenLayers WMS Feature Info Example (GeoServer)</title>
+    <script type='text/javascript' src='OpenLayers.js'></script>
+    
+    <style type="text/css">
+        ul, li {
+            padding-left: 0px;
+            margin-left: 0px;
+            list-style: none;
+        }
+        #info {
+            position: absolute;
+            top: 6em;
+            left: 550px;
+        }
+        #info table td {
+            border:1px solid #ddd;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+            font-size: 90%;
+            padding: .2em .1em;
+            background:#fff;
+	}
+	#info table th{
+	    padding:.2em .2em;
+            text-transform: uppercase;
+            font-weight: bold;
+            background: #eee;
+	}
+	tr.odd td {
+            background:#eee;
+	}
+	table.featureInfo caption {
+            text-align:left;
+            font-size:100%;
+            font-weight:bold;
+            padding:.2em .2em;
+	}
+
+
+    </style>
+    <script defer="defer" type="text/javascript">
+    OpenLayers.ProxyHost = "proxy.cgi?url=";
+    var map, infocontrols, water, highlightlayer;
+    
+    function load() {
+	var options = {
+    projection: new OpenLayers.Projection("EPSG:900913"),
+    units: "m",
+    maxResolution: 156543.0339,
+    maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+                                     20037508.34, 20037508.34)
+};
+
+map = new OpenLayers.Map('map', options);
+        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+var position = new OpenLayers.LonLat(90.400558, 23.794455).transform( fromProjection, toProjection);	
+var zoom = 13;  
+var mapnik= new OpenLayers.Layer.OSM();
+
+      var railwaysOfDhakaCity  = new OpenLayers.Layer.WMS("Railways",
+            "http://localhost:8080/geoserver/wms",
+		   {'layers': 'MyGroup:railwaysOfDhakaCity', transparent: true, format: 'image/png'},
+            {isBaseLayer: false, visibility: false}
+         );
+		//map.addLayer(railwaysOfDhakaCity);	
+
+        var roads = new OpenLayers.Layer.WMS("Roads",
+            "http://localhost:8080/geoserver/wms",
+		   {'layers': 'MyGroup:roadsOfDhakaCity ', transparent: true, format: 'image/png'},
+            {isBaseLayer: false}
+        );
+
+        highlightLayer = new OpenLayers.Layer.Vector("Highlighted Features", {
+            displayInLayerSwitcher: false, 
+            isBaseLayer: false 
+            }
+        );
+
+        infoControls = {
+            click: new OpenLayers.Control.WMSGetFeatureInfo({
+                url: 'http://localhost:8080/geoserver/wms', 
+                title: 'Identify features by clicking',
+                layers: [roads],
+                queryVisible: true
+            })
+        };
+
+        map.addLayers([mapnik, railwaysOfDhakaCity, roads, highlightLayer]); 
+        for (var i in infoControls) { 
+            infoControls[i].events.register("getfeatureinfo", this, showInfo);
+            map.addControl(infoControls[i]); 
+        }
+
+        map.addControl(new OpenLayers.Control.LayerSwitcher());
+
+        infoControls.click.activate();
+        map.setCenter(position, zoom );
+    }
+
+    function showInfo(evt) {
+        if (evt.features && evt.features.length) {
+             highlightLayer.destroyFeatures();
+             highlightLayer.addFeatures(evt.features);
+             highlightLayer.redraw();
+        } else {
+            document.getElementById('responseText').innerHTML = evt.text;
+        }
+    }
+
+    function toggleControl(element) {
+        for (var key in infoControls) {
+            var control = infoControls[key];
+            if (element.value == key && element.checked) {
+                control.activate();
+            } else {
+                control.deactivate();
+            }
+        }
+    }
+
+    function toggleFormat(element) {
+        for (var key in infoControls) {
+            var control = infoControls[key];
+            control.infoFormat = element.value;
+        }
+    }
+
+    function toggleLayers(element) {
+        for (var key in infoControls) {
+            var control = infoControls[key];
+            if (element.value == 'Specified') {
+                control.layers = [roads];
+            } else {
+                control.layers = null;
+            }
+        }
+    }
+
+    // function toggle(key
+    </script>
+  </head>
+  <body onload="load()">
+      <h1 id="title">Feature Info Example</h1>
+
+
+    <div id="info">
+        <div id="responseText">
+        </div>
+    </div>
+      <div id="map" style='width: 1255px; height:655px;'></div>
+    <div id="docs">
+    </div>
+        <ul id="control">
+            <li>
+                <input type="radio" name="controlType" value="click" id="click"
+                       onclick="toggleControl(this);" checked="checked" />
+                <label for="click">Click</label>
+            </li>
+        </ul>
+        <ul id="format">
+            <li>
+                <input type="radio" name="formatType" value="text/html" id="html"
+                       onclick="toggleFormat(this);" checked="checked" />
+                <label for="html">Show HTML Description</label>
+            </li>
+            <li>
+                <input type="radio" name="formatType" value="application/vnd.ogc.gml" id="highlight" 
+                       onclick="toggleFormat(this);" />
+                <label for="highlight">Highlight Feature on Map</label>
+            </li>
+        </ul>
+        <ul id="layers">
+            <li>
+                <input type="radio" name="layerSelection" value="Specified" id="Specified"
+                       onclick="toggleLayers(this);" checked="checked" />
+                <label for="Specified">Get water body info</label>
+            </li>
+            <li>
+                <input type="radio" name="layerSelection" value="Auto" id="Auto" 
+                       onclick="toggleLayers(this);" />
+                <label for="Auto">Get info for visible layers</label>
+            </li>
+        </ul>
+  </body>
+</html>

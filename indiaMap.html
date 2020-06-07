@@ -1,0 +1,27 @@
+<html>
+   <head>
+        <script type='text/javascript' src='OpenLayers.js'></script>
+ 
+        <script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        </head>
+        <body>
+         <h1>Countries of Colorado</h1>
+         <div id="map"></div>
+         <script defer="defer" type="text/javascript">
+         var map = new OpenLayers.Map('map'); 
+ basemap = new OpenLayers.Layer.WMS( "Layer Name1",
+    "http://localhost:8080/geoserver/wms/OSGIS", {layers: 'OSGIS:states'} );\
+ utility = new OpenLayers.Layer.WMS( "Layer Name2",
+    "http://localhost:8080/geoserver/wms/OSGIS", {layers: 'OSGIS:DhakaCity ', transparent:"true"}, {isBaseLayer:false} );
+ map.addLayers([basemap, utility]);
+ map.zoomToMaxExtent(); 
+  </script>
+ </body>
+</html>
+
+
+
+
+
+

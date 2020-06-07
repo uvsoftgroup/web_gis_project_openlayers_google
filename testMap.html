@@ -1,0 +1,88 @@
+<html>
+   <head>
+         <title>Counties of Colorado</title>
+         <link rel="stylesheet" href="lib/openlayers/theme/default/style.css" type="text/css">
+         <style type="text/css">
+        /* General settings */
+        body {
+                font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+                font-size: small;
+        }
+
+        /* Map settings */
+        #map {
+                clear: both;
+                position: relative;
+                width: 407px;
+                height: 512px;
+                border: 1px solid black;
+        }
+</style>
+          <script type='text/javascript' src='OpenLayers.js'></script>
+ <!-- Google Maps APIs version 3-->
+        <script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        </head>
+        <body>
+         <h1>Countries of Colorado</h1>
+         <div id="map-id"></div>
+         <script>
+        var bounds = new OpenLayers.Bounds(
+                90.33718199999998, 23.66957000000002,
+                90.50988799999999, 23.903699000000017
+         );
+
+        var options = {
+                         controls: [],
+                         maxExtent: bounds,
+                         maxResolution: 0.02741796875,
+                         projection: "EPSG:4326",
+                         units: 'm'
+        };
+
+        map = new OpenLayers.Map('map-id', options);
+
+        var ccounties = new OpenLayers.Layer.WMS(
+                         "Buildings of Dhaka", "http://localhost:8080/geoserver/OSGIS/wms?service=WMS&version=1.1.0&request=GetMap&layers=OSGIS:DhakaCity&styles=&bbox=90.33718199999998,23.66957000000002,90.50988799999999,23.903699000000017&width=377&height=512&srs=EPSG:4326&format=application/openlayers",
+                         {
+                                 srs: 'EPSG:4326',
+                                 layers: 'OSGIS:DhakaCity',
+                                 styles: 'polygon',
+                                 format:'image/png'
+                         },
+                         {singleTile: true, ratio: 1}
+        );
+      /*
+        var bbuildings = new OpenLayers.Layer.WMS(
+                        "Boulder buildings - Untiled", "http://localhost:8083/geoserver/wms",
+                        {
+                                layers: 'geosolutions:bbuildings',
+                                format:'image/png',
+                                transparent: true,
+                                styles: 'polygon'
+                        },
+                        {singleTile: true, buffer:0, ratio: 1}
+        );
+    */
+        map.addLayers([ccounties]);
+
+        // build up all controls
+        map.addControl(new OpenLayers.Control.PanZoomBar({
+                position: new OpenLayers.Pixel(2, 15)
+        }));
+        map.addControl(new OpenLayers.Control.Navigation());
+        map.addControl(new OpenLayers.Control.Scale());
+        map.addControl(new OpenLayers.Control.MousePosition());
+
+        map.zoomToExtent(bounds);
+</script>
+        </body>
+</html>
+
+
+
+
+basemap = new OpenLayers.Layer.WMS( "Layer Name1",
+    "http://localhost:8080/geoserver/wms/workspacename", {layers: 'workspacename:layername'} );\
+utility = new OpenLayers.Layer.WMS( "Layer Name2",
+    "http://localhost:8080/geoserver/wms/workspacename", {layers: 'workspacename:layername', transparent:"true"}, {isBaseLayer:false} );

@@ -1,0 +1,11 @@
+var centerlausanne = document.getElementById('centerlausanne');
+centerlausanne.addEventListener('click', function() {
+  var feature = source.getFeatures()[1];
+  var point = /** @type {ol.geom.Point} */ (feature.getGeometry());
+  var size = /** @type {ol.Size} */ (map.getSize());
+  view.centerOn(
+      point.getCoordinates(),
+      size,
+      [570, 500]
+  );
+}, false);

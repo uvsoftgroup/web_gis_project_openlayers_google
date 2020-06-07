@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>GetFeatureInfo Popup</title>
+<script type='text/javascript' src='OpenLayers.js'></script>
+<script>
+OpenLayers.ProxyHost = "proxy.cgi?url=";
+var map, info;
+
+function load() {
+var options = {
+    projection: new OpenLayers.Projection("EPSG:900913"),
+    units: "m",
+    maxResolution: 156543.0339,
+    maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+                                     20037508.34, 20037508.34)
+};
+
+map = new OpenLayers.Map('map', options);
+/*
+var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+var position = new OpenLayers.LonLat(90.400558, 23.794455).transform( fromProjection, toProjection);	
+var zoom = 13;  
+*/
+var dhakaCity = new OpenLayers.Layer.WMS("Dhaka City",
+            "http://localhost:8080/geoserver/wms",
+		   {'layers': 'MyGroup:DhakaCity', transparent: true, format: 'image/png'},
+            {isBaseLayer: true}
+         );
+		 
+var placesOfDhakaCity = new OpenLayers.Layer.WMS("Places",
+            "http://localhost:8080/geoserver/wms",
+		   {'layers': 'MyGroup:PlacesOfDhakaCity', transparent: true, format: 'image/png'},
+            {isBaseLayer: false}
+         );
+		 
+		 
+		
+var roads = new OpenLayers.Layer.WMS("Roads",
+           "http://localhost:8080/geoserver/wms",
+		   {'layers': 'MyGroup:roadsOfDhakaCity ', transparent: true, format: 'image/png'},
+            {isBaseLayer: false}
+         );
+		 
+var highlight = new OpenLayers.Layer.Vector("Highlighted Features", {
+displayInLayerSwitcher: false,
+isBaseLayer: false
+});
+map.addLayers([dhakaCity, placesOfDhakaCity, roads]);
+info = new OpenLayers.Control.WMSGetFeatureInfo({
+url: 'http://localhost:8080/geoserver/wms',
+title: 'Identify features by clicking',
+queryVisible: true,
+eventListeners: {
+getfeatureinfo: function(event) {
+map.addPopup(new OpenLayers.Popup.FramedCloud(
+"chicken",
+map.getLonLatFromPixel(event.xy),
+null,
+event.text,
+null,
+true
+));
+}
+}
+});
+map.addControl(info);
+info.activate();
+map.addControl(new OpenLayers.Control.LayerSwitcher());
+map.zoomToMaxExtent();
+
+ }
+</script>
+</head>
+<body onload="load()">
+<h1 id="title">Feature Info in Popup</h1>
+<div id="tags">
+WMS, GetFeatureInfo, popup
+</div>
+<div id="map" style='width: 1255px; height:655px;'></div>
+<div id="docs"></div>
+</body>
+</html>

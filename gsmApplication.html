@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset='utf-8'>
+ <title>Geo GSM Management</title>
+ <!-- OpenLayers.js -->
+ <script type='text/javascript' src='OpenLayers.js'></script>
+ <!-- Third party javaScript graphs APIs -->
+<script language="javascript" type="text/javascript" src="js/flot/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.pie.pack.js"></script>
+<!-- Customized javaScript APIs -->
+<script language="javascript" type="text/javascript" src="graphs.js"></script>
+<link rel="stylesheet" href="theme/default/style.css" type="text/css">
+<!-- Customized OpenLayers and Google  APIs -->
+<script type="text/javascript" src="osmAndgoogleMapTemplateTest.js"></script>
+<script type="text/javascript" src="dynamicStationLayer.js"></script>
+<script type="text/javascript" src="dynamicStationLinkLayer.js"></script>
+<script type="text/javascript" src="dynamicStationPointLayer.js"></script>
+
+<link rel="stylesheet" href="CSS_class/mapclient.css" type="text/css">
+<link rel="stylesheet" href="CSS_class/style.css" type="text/css">
+<link rel="stylesheet" href="CSS_class/style_Sicherung.css" type="text/css">
+<!-- Google Maps APIs version 3-->
+<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
+</head>
+<body onload="osmAndgoogleMapTemplateTest(); graph()">
+<table width="100%">
+<tr>
+<td width="90%">
+<div id="map"  style='width: 850px; height:550px;'></div> <div id="layer_switcher_control"></div>
+</td>
+<td width="10%"><strong>Mobile Operator share in Bangladesh:</strong><div id="MOP_pie_graph" style="width:175px;height:175px"></div>
+</td>
+</tr>
+</table>
+
+<br>
+<table width="100%">
+<tr>
+<td>
+Click the station <br>logo to get the info!
+</td>
+</tr>
+<tr>
+<td width="50%">
+<div colspan="11" align="left" valign="bottom"><input TYPE="button" value="Print Station" onClick="window.print()"> </div>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+html { 
+	overflow-y: scroll; 
+} 
+
+body {
+	background-color: #FFFFFF;
+	font-family: Arial;
+	background-color: lightgray;/*#FFFFFF;*/ /*Diskussion*/
+}
+
+
+
+
+
+ul#menu1, ul#menu1 ul {
+    background-color: #DEDEDE;
+    border-color: red; /*Aussenlinie*/
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    border-width: 1px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+ul#menu1 ul {
+    background-color: #FFFFFF;
+    border-color: yellow; /*Aussenlinie DropDown*/
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 3.5px 3.5px 5px #000000;
+    display: none;
+    left: 0;
+    padding: 0 10px 10px;
+    position: absolute;
+    top: 100%;
+}
+
+ul#menu1 li:hover > * {
+    display: block;
+}
+
+ul#menu1 li {
+    display: block;
+    float: left;
+    font-size: 0;
+    position: relative;
+    white-space: nowrap;
+}
+
+ul#menu1 li:hover {
+    z-index: 1;
+}
+
+ul#menu1 {
+    display: inline-block;
+    font-size: 0;
+    padding: 0;
+    position: relative;
+    z-index: 999;
+}
+
+* html ul#menu1 li a {
+    display: inline-block;
+}
+
+ul#menu1 > li {
+    margin: 0;
+}
+
+ul#menu1 a:active, ul#menu1 a:focus {
+    outline-style: none;
+}
+
+ul#menu1 a {
+    background-color: #abd147;
+    background-image: url("mainbk.png");
+    background-position: 0 0;
+    background-repeat: repeat;
+    border-color: blue;
+    border-style: solid;
+    border-width: 0 0 0 1px;
+    color: #000000;
+    cursor: pointer;
+    display: block;
+    font: bold 14px Trebuchet MS;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 1px #FFFFFF;
+    vertical-align: middle;
+}
+
+ul#menu1 ul li {
+    float: none;
+    margin: 10px 0 0;
+}
+
+ul#menu1 ul a {
+    background-color: #FFFFFF;
+    background-image: none;
+    border-radius: 0 0 0 0;
+    border-width: 0;
+    color: #000000;
+    font: 15px Tahoma;
+    padding: 4px;
+    text-align: left;
+    text-decoration: none;
+}
+
+ul#menu1 li:hover > a, ul#menu1 li a.pressed {
+    background-color: #0C97E2; /*Farbe hover*/
+    background-image: url("mainbk.png");
+    background-position: 0 100px;
+    border-color: red; /*Aussenlinie*/
+    border-style: solid;
+    color: #000000;
+    text-decoration: none;
+    text-shadow: 0 0 1px #FFFFFF;
+}
+
+ul#menu1 span {
+    background-position: right center;
+    background-repeat: no-repeat;
+    display: block;
+    overflow: visible;
+    padding-right: 0;
+}
+
+ul#menu1 ul li:hover > a, ul#menu1 ul li a.pressed {
+    background-color: #FFFFFF;
+    background-image: none;
+    color: #0978B3;
+    text-decoration: none;
+}
+
+ul#menu1 li.topfirst > a {
+    border-radius: 5px 0 0 5px;
+}
+
+ul#menu1 li.toplast > a {
+    border-radius: 0 5px 5px 0;
+}
+
+/* Container content  */
+.content{
+	background-color: #FFFFFF;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1100px;
+	height: auto;
+	box-shadow: 0 0 20px #0D0D0D; /*Diskussion*/
+}
+
+/* Kopfzeile head */
+.header{
+	background-image:url(./pics/Hintergrundbild.jpg);
+	background-repeat:no-repeat;
+	padding:40px;
+	text-align:center;
+	width:1100px;
+	height:20px;
+	font-size:24px;
+	font-weight:bold;
+}	
+
+/* Menu */
+.menu{
+	width:1100px;
+	margin-top: -10px; /*-10px*/
+}
+
+/* language */
+.language{
+	margin-left: 85%;	
+}
+
+/* Navigation navi*/
+.navi{	
+	background-repeat:no-repeat;
+	width:260px;
+	height: auto;
+	padding:10px;
+	float: left;
+	text-align: left;
+	font-size: 14px;
+	margin-top: 20px;
+}
+
+/*Hauptfenster main*/
+.main{
+	font-family: Arial;
+	width:800px;
+	height: auto;
+	padding:10px;
+	vertical-align: middle;
+	text-align:left;
+	float:right;
+	background-repeat:no-repeat;
+	margin-top: 40px;
+}
+
+/* Fusszeile foot*/
+.footer{
+	background-image:url(./pics/Hintergrundbild.jpg);
+	width:1100px;
+	height:30px;
+}
+
+#footer{
+	font-family: Arial;
+	text-align:center;
+	padding:4px;
+	font-size: 12px;
+}
+
+/*Links*/
+a{
+	color:#000;
+	text-decoration:none
+}
+a.gotolink{
+	color:#abd147;
+	text-decoration:none;
+	font-weight:bold;
+}

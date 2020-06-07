@@ -1,0 +1,121 @@
+
+html, body{
+height:100%;
+width:100%;
+margin:0px;
+padding:0px;
+
+}
+#map{
+width:80%; 
+height:80%; 
+left:15%;
+position: absolute;
+border:0px;
+
+}
+#panel{
+position:absolute; 
+margin-left:-180px;
+z-index:5;
+background-color:#fff;
+padding:5px;
+border:2px solid #999
+}
+
+#target{
+width:345px;
+margin:auto    
+}
+
+#layer_switcher_control{
+border:2px;
+padding:2px;
+
+}
+
+#layer_switcher_control .baseLbl{
+front-size:1.3em;
+front-weight:bold;
+color:green;
+}
+#layer_switcher_control .baseLayersDiv .labelSpan{
+
+front-style:italic;
+front-weight:bold;
+
+
+}
+#layer_switcher_control .dataLbl{
+front-size:1.3em;
+front-weight:bold;
+color:blue;
+
+}
+
+#layer_switcher_control .dataLayersDiv .labelSpan{
+front-style:italic;
+front-weight:bold;
+}
+
+
+
+.olControlScale {
+        right: 3px;
+        bottom: 3em;
+        display: block;
+        position: absolute;
+        font-size: smaller;
+}
+
+.olControlScaleLine {
+    bottom: 33px;
+	left:10px;	
+    background:blue;
+    padding: 5px
+
+ }
+ .olControlLayerSwitcher {
+        position: absolute;
+        top: 25px;
+        right: 0;
+        width: 20em;
+        font-family: sans-serif;
+        font-weight: 700;
+        margin-top: 3px;
+        margin-left: 3px;
+        margin-bottom: 3px;
+        font-size: smaller;
+        color:red;
+        background-color: transparent;
+}
+.olControlLayerSwitcher .layersDiv {
+        background:red;
+        width: 100%;
+        height: 100%;
+        padding: 5px 75px 5px 10px;
+}
+
+.olControlLayerSwitcher .layersDiv .baseLbl,.olControlLayerSwitcher .layersDiv .dataLbl
+        {
+        margin-top: 3px;
+        margin-left: 3px;
+        margin-bottom: 3px;
+}
+
+.olControlLayerSwitcher .layersDiv .baseLayersDiv,.olControlLayerSwitcher .layersDiv .dataLayersDiv
+        {
+        padding-left: 10px;
+}
+
+.olControlLayerSwitcher .maximizeDiv,.olControlLayerSwitcher .minimizeDiv
+        {
+        top: 5px;
+        right: 0;
+        cursor: pointer;
+}
+
+
+
+
+
