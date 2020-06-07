@@ -9,6 +9,6 @@ Technology & Tools used:
 3.HTML, CSS and Graphs js libraries
 
 # Description and Requirements
-[<img src="https://img.youtube.com/vi/lakR6MrjdPo/maxresdefault.jpg" width="75%">](https://youtu.be/lakR6MrjdPo)
+[<img src="https://img.youtube.com/vi/lakR6MrjdPo/maxresdefault.jpg" width="100%">](https://youtu.be/lakR6MrjdPo)
 # Development
-[<img src="https://img.youtube.com/vi/rN9ViuutrWE/maxresdefault.jpg" width="75%">](https://youtu.be/rN9ViuutrWE)
+[<img src="https://img.youtube.com/vi/rN9ViuutrWE/maxresdefault.jpg" width="100%">](https://youtu.be/rN9ViuutrWE)
