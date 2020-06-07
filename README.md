@@ -8,7 +8,7 @@ Front-End/GUI/UI development with JavaScript, OpenLayers, Google Maps APIs, java
 2.OpenStreet map server and Google map server\
 3.HTML, CSS and Graphs js libraries\
 
-[youtube playlist](https://www.youtube.com/playlist?list=PL61PaxtHbYMpyJXjibiBVgr_0Xelvm5aJ)
+[YouTube Playlist](https://www.youtube.com/playlist?list=PL61PaxtHbYMpyJXjibiBVgr_0Xelvm5aJ)
 
 
 ## 37_1:Development
